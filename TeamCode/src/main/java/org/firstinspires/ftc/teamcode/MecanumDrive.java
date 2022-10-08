@@ -32,7 +32,7 @@ public class MecanumDrive {
         robot.leftBackDrive.setPower(y-x+rx);
         robot.rightBackDrive.setPower(y+x-rx);
 
-        if (gamepad.left_bumper == true){
+        if (gamepad.left_bumper == true) {
             robot.leftFrontDrive.setPower((y+x+rx)/2);
             robot.rightFrontDrive.setPower((y-x-rx)/2);
             robot.leftBackDrive.setPower((y-x+rx)/2);
@@ -40,7 +40,7 @@ public class MecanumDrive {
         }
     }
 
-    public void shutdown(){
+    public void shutdown() {
         robot.leftFrontDrive.setPower(0);
         robot.rightFrontDrive.setPower(0);
         robot.leftBackDrive.setPower(0);

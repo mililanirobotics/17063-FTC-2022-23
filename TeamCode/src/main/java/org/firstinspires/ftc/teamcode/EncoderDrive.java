@@ -46,4 +46,8 @@ public class EncoderDrive {
         robot.leftBackDrive.setPower(motorPower);
         robot.rightBackDrive.setPower(motorPower);
     }
+
+    public void shutdown() {
+
+    }
 }
