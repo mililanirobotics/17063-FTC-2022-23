@@ -17,6 +17,8 @@ public class OfficialAuto extends LinearOpMode {
 
     public void runOpMode() {
         // Initialization
+        encoderDrive.init(this, telemetry);
+
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -24,10 +26,8 @@ public class OfficialAuto extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-        // run until the end of the match (driver presses STOP)
-        while (opModeIsActive()) {
-
-
-        }
+        // Code to run after start
+        encoderDrive.operate(this, 0.25, 24);
+        encoderDrive.shutdown();
     }
 }

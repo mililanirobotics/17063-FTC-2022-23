@@ -14,12 +14,13 @@ public class OfficialTeleOp extends OpMode
 {
     // Declare OpMode members.
     private MecanumDrive mecanumDrive = new MecanumDrive();
+    private HardwareDeclarations robot = new HardwareDeclarations();
 
     /*
      * Code to run ONCE when the driver hits INIT
      */
     public void init() {
-        mecanumDrive.init(this);
+        mecanumDrive.init(this, telemetry);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();

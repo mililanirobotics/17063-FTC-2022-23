@@ -1,22 +1,20 @@
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 public class MecanumDrive {
 
     // Declare OpMode members.
-    HardwareDeclarations robot = new HardwareDeclarations();
+    private HardwareDeclarations robot = new HardwareDeclarations();
 
-    public void init(OpMode opMode) {
-        robot.init(hardwareMap);
+    public void init(OpMode opMode, Telemetry telemetry) {
+        robot.init(opMode.hardwareMap);
 
         telemetry.addData("Status", "Initializes");
         telemetry.update();

@@ -1,15 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 
 // Imports
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class EncoderDrive {
 
-    HardwareDeclarations robot = new HardwareDeclarations();
+    private HardwareDeclarations robot = new HardwareDeclarations();
 
     final double PULSES_PER_ROTATION = 573.7;
     final double COUNTS_PER_ROTATION = PULSES_PER_ROTATION * 4;
@@ -17,12 +21,14 @@ public class EncoderDrive {
     final double WHEEL_CIRCUMFERENCE = Math.PI * WHEEL_DIAMETER;
     final double COUNTS_PER_INCH = COUNTS_PER_ROTATION / WHEEL_CIRCUMFERENCE;
 
-    public void init() {
+    public void init(LinearOpMode linearOpMode, Telemetry telemetry) {
+        robot.init(linearOpMode.hardwareMap);
+
         telemetry.addData("Status", "Initialized");
         telemetry.update();
     }
 
-    public void operate(double speed, double distance) {
+    public void operate(LinearOpMode linearOpMode, double speed, double distance) {
         double motorPower = speed;
         int motorTarget = (int)(distance * COUNTS_PER_INCH);
 
@@ -45,9 +51,16 @@ public class EncoderDrive {
         robot.rightFrontDrive.setPower(motorPower);
         robot.leftBackDrive.setPower(motorPower);
         robot.rightBackDrive.setPower(motorPower);
+
+        while(linearOpMode.opModeIsActive() && robot.leftFrontDrive.isBusy() || robot.rightFrontDrive.isBusy() || robot.leftBackDrive.isBusy() || robot.rightBackDrive.isBusy()) {
+
+        }
     }
 
     public void shutdown() {
-
+        robot.leftFrontDrive.setPower(0);
+        robot.rightFrontDrive.setPower(0);
+        robot.leftBackDrive.setPower(0);
+        robot.rightBackDrive.setPower(0);
     }
 }
