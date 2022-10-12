@@ -1,22 +1,17 @@
 package org.firstinspires.ftc.teamcode;
 
-// Imports
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class EncoderDrive {
 
     private HardwareDeclarations robot = new HardwareDeclarations();
 
-    final double PULSES_PER_ROTATION = 573.7;
-    final double COUNTS_PER_ROTATION = PULSES_PER_ROTATION * 4;
+    // Need to account for gear ratio, get ticks per rev function to be tested
+    final double COUNTS_PER_ROTATION = robot.leftFrontDrive.getMotorType().getTicksPerRev();
     final double WHEEL_DIAMETER = 3.77953;
     final double WHEEL_CIRCUMFERENCE = Math.PI * WHEEL_DIAMETER;
     final double COUNTS_PER_INCH = COUNTS_PER_ROTATION / WHEEL_CIRCUMFERENCE;
@@ -24,7 +19,7 @@ public class EncoderDrive {
     public void init(LinearOpMode linearOpMode, Telemetry telemetry) {
         robot.init(linearOpMode.hardwareMap);
 
-        telemetry.addData("Status", "Initialized");
+        telemetry.addData("Status", "Encoder Drive Initialized");
         telemetry.update();
     }
 

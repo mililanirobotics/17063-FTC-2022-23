@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-// Imports
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -8,6 +7,7 @@ import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class HardwareDeclarations {
@@ -20,6 +20,8 @@ public class HardwareDeclarations {
     public DcMotor leftLiftMotor = null;
     public DcMotor rightLiftMotor = null;
     public DcMotor scoringMotor = null;
+
+    public BNO055IMU imu = null;
 
     // Initialize hardware
     private ElapsedTime period = new ElapsedTime();
@@ -36,6 +38,8 @@ public class HardwareDeclarations {
         rightLiftMotor = hwMap.get(DcMotor.class, "rightLiftMotor");
         scoringMotor = hwMap.get(DcMotor.class, "scoringMotor");
 
+        imu = hwMap.get(BNO055IMU.class, "imu");
+
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
@@ -43,6 +47,14 @@ public class HardwareDeclarations {
         leftLiftMotor.setDirection(DcMotor.Direction.FORWARD);
         rightLiftMotor.setDirection(DcMotor.Direction.FORWARD);
         scoringMotor.setDirection(DcMotor.Direction.FORWARD);
+
+        leftFrontDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftBackDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFrontDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightBackDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftLiftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightLiftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        scoringMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         leftFrontDrive.setPower(0);
         leftBackDrive.setPower(0);
