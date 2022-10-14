@@ -13,10 +13,15 @@ public class OfficialAuto extends LinearOpMode {
     // Declare OpMode members
     private ElapsedTime runtime = new ElapsedTime();
     private EncoderDrive encoderDrive = new EncoderDrive();
+    private TurnDrive turnDrive = new TurnDrive();
+
+    public int signalImage;
+
 
     public void runOpMode() {
         // Initialization
         encoderDrive.init(this, telemetry);
+        turnDrive.init(this, telemetry);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -26,7 +31,23 @@ public class OfficialAuto extends LinearOpMode {
         runtime.reset();
 
         // Code to run after start
-        encoderDrive.operate(this, 0.25, 24);
+        switch (signalImage) {
+            case 1 :
+                encoderDrive.operate(this, 0.25, 24);
+                turnDrive.operate(this, 0.25, -90);
+                encoderDrive.operate(this, 0.25, 24);
+                break;
+            case 2 :
+                encoderDrive.operate(this, 0.25, 24);
+                break;
+            case 3 :
+                encoderDrive.operate(this, 0.25, 24);
+                turnDrive.operate(this, 0.25, 90);
+                encoderDrive.operate(this, 0.25, 24);
+                break;
+        }
+
         encoderDrive.shutdown();
+        turnDrive.shutdown();
     }
 }

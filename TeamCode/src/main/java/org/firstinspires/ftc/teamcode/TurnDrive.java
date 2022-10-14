@@ -33,7 +33,7 @@ public class TurnDrive {
         return angle.firstAngle;
     }
 
-    public void operate(LinearOpMode linearOpMode, double rotation, double speed) {
+    public void operate(LinearOpMode linearOpMode, double speed, double rotation) {
         double robotRotation = rotation;
         double motorPower = speed;
 
