@@ -14,9 +14,7 @@ public class OfficialAuto extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
     private EncoderDrive encoderDrive = new EncoderDrive();
     private TurnDrive turnDrive = new TurnDrive();
-
-    public int signalImage;
-
+    private VisionTracking vision = new VisionTracking();
 
     public void runOpMode() {
         // Initialization
@@ -31,22 +29,25 @@ public class OfficialAuto extends LinearOpMode {
         runtime.reset();
 
         // Code to run after start
-        switch (signalImage) {
-            case 1 :
+        String currentSignal = vision.operate(this, telemetry);
+
+        switch (currentSignal) {
+            case "1" :
                 encoderDrive.operate(this, 0.25, 24);
                 turnDrive.operate(this, 0.25, -90);
                 encoderDrive.operate(this, 0.25, 24);
                 break;
-            case 2 :
+            case "2" :
                 encoderDrive.operate(this, 0.25, 24);
                 break;
-            case 3 :
+            case "3" :
                 encoderDrive.operate(this, 0.25, 24);
                 turnDrive.operate(this, 0.25, 90);
                 encoderDrive.operate(this, 0.25, 24);
                 break;
         }
 
+        vision.shutdown();
         encoderDrive.shutdown();
         turnDrive.shutdown();
     }

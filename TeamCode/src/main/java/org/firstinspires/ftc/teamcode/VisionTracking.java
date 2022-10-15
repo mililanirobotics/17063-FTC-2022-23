@@ -14,8 +14,6 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 public class VisionTracking {
 
     // Declare OpMode members
-    private HardwareDeclarations robot = new HardwareDeclarations();
-
     private static final String TFOD_MODEL_FILE = "/sdcard/FIRST/tflitemodels/CustomTeamModel.tflite";
 
     private static final String[] LABELS = {
@@ -29,15 +27,38 @@ public class VisionTracking {
     private VuforiaLocalizer vuforia;
     private TFObjectDetector tfObjectDetector;
 
-
     public void init(LinearOpMode linearOpMode, Telemetry telemetry) {
         initVuforia(linearOpMode);
         initTfObjectDetector(linearOpMode);
+
+        if (tfObjectDetector != null) {
+            tfObjectDetector.activate();
+        }
+        
+        telemetry.addData("Status: ", "Vision tracking initalized");
+        telemetry.update();
     }
 
-    public void operate(LinearOpMode linearOpMode) {
-    }
+    public String operate(LinearOpMode linearOpMode, Telemetry telemetry) {
+        String signalImage = "0";
 
+        while (linearOpMode.opModeIsActive()) {
+            if (tfObjectDetector != null) {
+                List<Recognition> updatedRecognitions = tfObjectDetector.getUpdatedRecognitions();
+
+                if (updatedRecognitions != null) {
+                    for (Recognition recognition : updatedRecognitions) {
+                        signalImage = recognition.getLabel();
+
+                        telemetry.addData("Image Recognized: ", signalImage);
+                    }
+                    telemetry.update();
+                }
+            }
+        }
+
+        return signalImage;
+    }
 
     public void shutdown() {
     }

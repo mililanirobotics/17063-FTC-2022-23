@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class MecanumDrive {
@@ -16,7 +15,7 @@ public class MecanumDrive {
     public void init(OpMode opMode, Telemetry telemetry) {
         robot.init(opMode.hardwareMap);
 
-        telemetry.addData("Status", "Initializes");
+        telemetry.addData("Status", "Mecanum Drive Initializes");
         telemetry.update();
     }
 
@@ -33,7 +32,7 @@ public class MecanumDrive {
         robot.rightBackDrive.setPower((y+x-rx) / denominator);
 
         // Slow-mode
-        if (gamepad.left_bumper == true) {
+        if (gamepad.left_bumper) {
             robot.leftFrontDrive.setPower((y+x+rx) / denominator * 0.5);
             robot.rightFrontDrive.setPower((y-x-rx) / denominator * 0.5);
             robot.leftBackDrive.setPower((y-x+rx) / denominator * 0.5);
