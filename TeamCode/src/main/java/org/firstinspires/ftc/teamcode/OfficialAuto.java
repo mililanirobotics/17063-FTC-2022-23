@@ -20,9 +20,7 @@ public class OfficialAuto extends LinearOpMode {
         // Initialization
         encoderDrive.init(this, telemetry);
         turnDrive.init(this, telemetry);
-
-        telemetry.addData("Status", "Initialized");
-        telemetry.update();
+        vision.init(this, telemetry);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();

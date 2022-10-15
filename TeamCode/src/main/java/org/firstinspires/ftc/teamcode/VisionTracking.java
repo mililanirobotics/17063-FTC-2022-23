@@ -14,6 +14,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 public class VisionTracking {
 
     // Declare OpMode members
+    private HardwareDeclarations robot = new HardwareDeclarations();
     private static final String TFOD_MODEL_FILE = "/sdcard/FIRST/tflitemodels/CustomTeamModel.tflite";
 
     private static final String[] LABELS = {
@@ -34,7 +35,7 @@ public class VisionTracking {
         if (tfObjectDetector != null) {
             tfObjectDetector.activate();
         }
-        
+
         telemetry.addData("Status: ", "Vision tracking initalized");
         telemetry.update();
     }
@@ -66,7 +67,7 @@ public class VisionTracking {
     private void initVuforia(LinearOpMode linearOpMode) {
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
-        parameters.cameraName = linearOpMode.hardwareMap.get(WebcamName.class, "Webcam 1");
+        parameters.camera = robot.camera;
 
         vuforia = ClassFactory.getInstance().createVuforia(parameters);
     }

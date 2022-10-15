@@ -10,7 +10,8 @@ public class EncoderDrive {
 
     private HardwareDeclarations robot = new HardwareDeclarations();
 
-    final double COUNTS_PER_ROTATION = robot.leftFrontDrive.getMotorType().getTicksPerRev();
+    final double PULSES_PER_ROTATION = 28;
+    final double COUNTS_PER_ROTATION = PULSES_PER_ROTATION * 4;
     final double DRIVE_GEAR_REDUCTION = 19.2;
     final double WHEEL_DIAMETER = 3.77953;
     final double WHEEL_CIRCUMFERENCE = Math.PI * WHEEL_DIAMETER;

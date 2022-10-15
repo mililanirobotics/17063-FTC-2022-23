@@ -9,6 +9,10 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.vuforia.CameraDevice;
+
+import org.firstinspires.ftc.robotcore.external.hardware.camera.Camera;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 
 public class HardwareDeclarations {
 
@@ -22,6 +26,7 @@ public class HardwareDeclarations {
     public DcMotor scoringMotor = null;
 
     public BNO055IMU imu = null;
+    public Camera camera;
 
     // Initialize hardware
     private ElapsedTime period = new ElapsedTime();
@@ -39,6 +44,7 @@ public class HardwareDeclarations {
         scoringMotor = hwMap.get(DcMotor.class, "scoringMotor");
 
         imu = hwMap.get(BNO055IMU.class, "imu");
+        camera = hwMap.get(Camera.class, "Webcam1");
 
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
