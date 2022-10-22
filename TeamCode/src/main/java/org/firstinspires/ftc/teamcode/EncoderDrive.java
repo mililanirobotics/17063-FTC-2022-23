@@ -8,7 +8,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class EncoderDrive {
 
-    private HardwareDeclarations robot = new HardwareDeclarations();
+    final HardwareDeclarations robot = new HardwareDeclarations();
 
     final double PULSES_PER_ROTATION = 28;
     final double COUNTS_PER_ROTATION = PULSES_PER_ROTATION * 4;

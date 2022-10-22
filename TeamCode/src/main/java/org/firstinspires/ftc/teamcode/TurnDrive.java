@@ -16,8 +16,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 public class TurnDrive {
 
-    private HardwareDeclarations robot = new HardwareDeclarations();
-    private BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+    final HardwareDeclarations robot = new HardwareDeclarations();
+    final BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
 
     public void init(LinearOpMode linearOpMode, Telemetry telemetry) {
@@ -34,21 +34,19 @@ public class TurnDrive {
     }
 
     public void operate(LinearOpMode linearOpMode, double speed, double rotation) {
-        double robotRotation = rotation;
-        double motorPower = speed;
 
-        while(robotRotation != getHeading()) {
+        while(rotation != getHeading()) {
             if(rotation > 0) {
-                robot.leftFrontDrive.setPower(-motorPower);
-                robot.leftBackDrive.setPower(-motorPower);
-                robot.rightFrontDrive.setPower(-motorPower);
-                robot.rightBackDrive.setPower(-motorPower);
+                robot.leftFrontDrive.setPower(-speed);
+                robot.leftBackDrive.setPower(-speed);
+                robot.rightFrontDrive.setPower(-speed);
+                robot.rightBackDrive.setPower(-speed);
             }
             if (rotation < 0) {
-                robot.leftFrontDrive.setPower(motorPower);
-                robot.leftBackDrive.setPower(motorPower);
-                robot.rightFrontDrive.setPower(motorPower);
-                robot.rightBackDrive.setPower(motorPower);
+                robot.leftFrontDrive.setPower(speed);
+                robot.leftBackDrive.setPower(speed);
+                robot.rightFrontDrive.setPower(speed);
+                robot.rightBackDrive.setPower(speed);
             }
         }
     }

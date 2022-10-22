@@ -12,8 +12,8 @@ import com.qualcomm.robotcore.util.Range;
 public class OfficialTeleOp extends OpMode
 {
     // Declare OpMode members.
-    private MecanumDrive mecanumDrive = new MecanumDrive();
-    private HardwareDeclarations robot = new HardwareDeclarations();
+    final MecanumDrive mecanumDrive = new MecanumDrive();
+    final HardwareDeclarations robot = new HardwareDeclarations();
 
     /*
      * Code to run ONCE when the driver hits INIT

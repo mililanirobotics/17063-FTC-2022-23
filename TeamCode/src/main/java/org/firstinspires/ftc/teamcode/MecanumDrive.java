@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class MecanumDrive {
 
     // Declare OpMode members.
-    private HardwareDeclarations robot = new HardwareDeclarations();
+    final HardwareDeclarations robot = new HardwareDeclarations();
 
     public void init(OpMode opMode, Telemetry telemetry) {
         robot.init(opMode.hardwareMap);

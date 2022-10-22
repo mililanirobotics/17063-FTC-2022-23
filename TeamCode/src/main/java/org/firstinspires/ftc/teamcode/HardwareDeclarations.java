@@ -29,7 +29,7 @@ public class HardwareDeclarations {
     public Camera camera;
 
     // Initialize hardware
-    private ElapsedTime period = new ElapsedTime();
+    final ElapsedTime period = new ElapsedTime();
     HardwareMap hwMap = null;
 
     public void init(HardwareMap ahwMap) {

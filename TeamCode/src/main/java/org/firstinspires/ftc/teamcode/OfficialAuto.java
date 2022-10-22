@@ -11,10 +11,10 @@ import com.qualcomm.robotcore.util.Range;
 public class OfficialAuto extends LinearOpMode {
 
     // Declare OpMode members
-    private ElapsedTime runtime = new ElapsedTime();
-    private EncoderDrive encoderDrive = new EncoderDrive();
-    private TurnDrive turnDrive = new TurnDrive();
-    private VisionTracking vision = new VisionTracking();
+    final ElapsedTime runtime = new ElapsedTime();
+    final EncoderDrive encoderDrive = new EncoderDrive();
+    final TurnDrive turnDrive = new TurnDrive();
+    final VisionTracking vision = new VisionTracking();
 
     public void runOpMode() {
         // Initialization
@@ -27,22 +27,29 @@ public class OfficialAuto extends LinearOpMode {
         runtime.reset();
 
         // Code to run after start
-        String currentSignal = vision.operate(this, telemetry);
+        String currentSignal = vision.operate(this, telemetry, runtime, 15);
 
-        switch (currentSignal) {
-            case "1" :
-                encoderDrive.operate(this, 0.25, 24);
-                turnDrive.operate(this, 0.25, -90);
-                encoderDrive.operate(this, 0.25, 24);
-                break;
-            case "2" :
-                encoderDrive.operate(this, 0.25, 24);
-                break;
-            case "3" :
-                encoderDrive.operate(this, 0.25, 24);
-                turnDrive.operate(this, 0.25, 90);
-                encoderDrive.operate(this, 0.25, 24);
-                break;
+        if (currentSignal.equals("Trojan")) {
+            telemetry.addData("Status", "Trojan");
+            telemetry.update();
+
+            encoderDrive.operate(this, 0.25, 24);
+            turnDrive.operate(this, 0.25, -90);
+            encoderDrive.operate(this, 0.25, 24);
+        }
+        else if (currentSignal.equals("Gears")) {
+            telemetry.addData("Status", "Gears");
+            telemetry.update();
+
+            encoderDrive.operate(this, 0.25, 24);
+        }
+        else if (currentSignal.equals("Hot Shot")) {
+            telemetry.addData("Status", "Hot Shot");
+            telemetry.update();
+
+            encoderDrive.operate(this, 0.25, 24);
+            turnDrive.operate(this, 0.25, 90);
+            encoderDrive.operate(this, 0.25, 24);
         }
 
         vision.shutdown();

@@ -9,7 +9,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class LiftPayload {
 
-    private HardwareDeclarations robot = new HardwareDeclarations();
+    final HardwareDeclarations robot = new HardwareDeclarations();
 
     public void init(OpMode opMode, Telemetry telemetry) {
         robot.init(opMode.hardwareMap);
