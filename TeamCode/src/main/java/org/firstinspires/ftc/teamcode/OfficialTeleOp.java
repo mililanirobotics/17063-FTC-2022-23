@@ -14,12 +14,16 @@ public class OfficialTeleOp extends OpMode
     // Declare OpMode members.
     final MecanumDrive mecanumDrive = new MecanumDrive();
     final HardwareDeclarations robot = new HardwareDeclarations();
+    final LiftPayload liftPayload = new LiftPayload();
+    final IntakeAndScore intakeAndScore = new IntakeAndScore();
 
     /*
      * Code to run ONCE when the driver hits INIT
      */
     public void init() {
         mecanumDrive.init(this, telemetry);
+        liftPayload.init(this, telemetry);
+        intakeAndScore.init(this, telemetry);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -30,6 +34,8 @@ public class OfficialTeleOp extends OpMode
      */
     public void loop() {
         mecanumDrive.operate(this, gamepad1);
+        liftPayload.operate(this, gamepad2, 24000, 0);
+        intakeAndScore.operate(this, gamepad2);
     }
 
     /*
@@ -37,6 +43,8 @@ public class OfficialTeleOp extends OpMode
      */
     public void stop() {
         mecanumDrive.shutdown();
+        liftPayload.shutdown();
+        intakeAndScore.shutdown();
     }
 
 }

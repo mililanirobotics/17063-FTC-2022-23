@@ -25,9 +25,18 @@ public class IntakeAndScore {
         if (intake >= 0.5) {
             robot.scoringMotor.setPower(0.5);
         }
+        else {
+            robot.scoringMotor.setPower(0);
+        }
 
         if (intake <= 0.5) {
             robot.scoringMotor.setPower(-0.5);
         }
+        else {
+            robot.scoringMotor.setPower(0);
+        }
+    }
+    public void shutdown() {
+        robot.scoringMotor.setPower(0);
     }
 }

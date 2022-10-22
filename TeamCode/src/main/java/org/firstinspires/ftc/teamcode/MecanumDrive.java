@@ -25,18 +25,17 @@ public class MecanumDrive {
         double rx = gamepad.right_stick_x;
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
 
-        // Normal Drive
-        robot.leftFrontDrive.setPower((y+x+rx) / denominator);
-        robot.rightFrontDrive.setPower((y-x-rx) / denominator);
-        robot.leftBackDrive.setPower((y-x+rx) / denominator);
-        robot.rightBackDrive.setPower((y+x-rx) / denominator);
-
-        // Slow-mode
         if (gamepad.left_bumper) {
             robot.leftFrontDrive.setPower((y+x+rx) / denominator * 0.5);
             robot.rightFrontDrive.setPower((y-x-rx) / denominator * 0.5);
             robot.leftBackDrive.setPower((y-x+rx) / denominator * 0.5);
             robot.rightBackDrive.setPower((y+x-rx) / denominator * 0.5);
+        }
+        else {
+            robot.leftFrontDrive.setPower((y+x+rx) / denominator);
+            robot.rightFrontDrive.setPower((y-x-rx) / denominator);
+            robot.leftBackDrive.setPower((y-x+rx) / denominator);
+            robot.rightBackDrive.setPower((y+x-rx) / denominator);
         }
     }
 
