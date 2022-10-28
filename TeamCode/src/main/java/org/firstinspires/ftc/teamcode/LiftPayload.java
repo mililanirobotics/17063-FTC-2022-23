@@ -18,23 +18,22 @@ public class LiftPayload {
         telemetry.update();
     }
 
-    public void operate(OpMode opMode, Gamepad gamepad, double maxCounts, double minCounts) {
+    public void operate(Gamepad gamepad) {
         boolean leftBumper = gamepad.left_bumper;
         boolean rightBumper = gamepad.right_bumper;
 
-        // Check this if lift dies
-        if (leftBumper && robot.leftLiftMotor.getCurrentPosition() < maxCounts && robot.rightLiftMotor.getCurrentPosition() < maxCounts) {
-            robot.leftLiftMotor.setPower(0.5);
-            robot.rightLiftMotor.setPower(0.5);
+        if (leftBumper) {
+            robot.leftLiftMotor.setPower(-1);
+            robot.rightLiftMotor.setPower(-1);
         }
         else {
             robot.leftLiftMotor.setPower(0);
             robot.rightLiftMotor.setPower(0);
         }
 
-        if (rightBumper && robot.leftLiftMotor.getCurrentPosition() > minCounts && robot.rightLiftMotor.getCurrentPosition() > minCounts) {
-            robot.leftLiftMotor.setPower(-0.5);
-            robot.rightLiftMotor.setPower(-0.5);
+        if (rightBumper) {
+            robot.leftLiftMotor.setPower(1);
+            robot.rightLiftMotor.setPower(1);
         }
         else {
             robot.leftLiftMotor.setPower(0);

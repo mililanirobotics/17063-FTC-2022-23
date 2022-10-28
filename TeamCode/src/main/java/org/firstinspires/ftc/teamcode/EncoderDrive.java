@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -25,7 +24,6 @@ public class EncoderDrive {
     }
 
     public void operate(LinearOpMode linearOpMode, double speed, double distance) {
-        double motorPower = speed;
         int motorTarget = (int)(distance * COUNTS_PER_INCH);
 
         robot.leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -43,10 +41,10 @@ public class EncoderDrive {
         robot.leftBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.rightBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        robot.leftFrontDrive.setPower(motorPower);
-        robot.rightFrontDrive.setPower(motorPower);
-        robot.leftBackDrive.setPower(motorPower);
-        robot.rightBackDrive.setPower(motorPower);
+        robot.leftFrontDrive.setPower(speed);
+        robot.rightFrontDrive.setPower(speed);
+        robot.leftBackDrive.setPower(speed);
+        robot.rightBackDrive.setPower(speed);
 
         while(linearOpMode.opModeIsActive() && robot.leftFrontDrive.isBusy() || robot.rightFrontDrive.isBusy() || robot.leftBackDrive.isBusy() || robot.rightBackDrive.isBusy()) {
 

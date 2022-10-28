@@ -17,12 +17,12 @@ public class VisionTracking {
 
     // Declare OpMode members
     final HardwareDeclarations robot = new HardwareDeclarations();
-    private static final String TFOD_MODEL_FILE = "/sdcard/FIRST/tflitemodels/CustomTeamModel.tflite";
+    private static final String TFOD_MODEL_FILE  = "/sdcard/FIRST/tflitemodels/Custom Model v2.tflite";
 
     private static final String[] LABELS = {
-            "Trojan",
             "Gears",
-            "Hot Shot"
+            "Hot Shot",
+            "Trojan"
     };
 
     private static final String VUFORIA_KEY = "AfCDK9H/////AAABmV1RcmG0/kG1og7GzNyI0ZAVv5gzjnQ4nLvp4MOsiXlbaf/bVI2JBbkj+Bvb8ur3KEl6D4mlcpwEpDMZ51nkqMqqG1VE53EjiDsUUBVZ36OiyfOSjoeoB1py8iT1CYO1EydEKeoOy/SSoF743egWLXTpyFi4Mfyg6DDW06lgfWNsoWJ904IL+6CJ3TMObEuE5Gtwqu1CccRpRCdaE0kCuGDsdd4o2NPZLEqdpAJcitJbyLeC//Qqh8tfK35W6kK5wG7JU46kjfrtPSsICZfSwvA+bmCIcmir4XKKLM/8dkx39bJNF+6FdBeLkIfaeDfrVV8+2RxzeBB+f5DpycmxB0LqzVTvOu+H9VDOWSBVr+l4";
@@ -38,7 +38,7 @@ public class VisionTracking {
             tfObjectDetector.activate();
         }
 
-        telemetry.addData("Status", "Vision tracking initalized");
+        telemetry.addData("Status", "Vision tracking initialized");
         telemetry.update();
     }
 

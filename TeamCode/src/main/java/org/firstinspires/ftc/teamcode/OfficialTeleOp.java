@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -13,7 +12,6 @@ public class OfficialTeleOp extends OpMode
 {
     // Declare OpMode members.
     final MecanumDrive mecanumDrive = new MecanumDrive();
-    final HardwareDeclarations robot = new HardwareDeclarations();
     final LiftPayload liftPayload = new LiftPayload();
     final IntakeAndScore intakeAndScore = new IntakeAndScore();
 
@@ -33,9 +31,9 @@ public class OfficialTeleOp extends OpMode
      * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
      */
     public void loop() {
-        mecanumDrive.operate(this, gamepad1);
-        liftPayload.operate(this, gamepad2, 24000, 0);
-        intakeAndScore.operate(this, gamepad2);
+        mecanumDrive.fieldCentricOperate(gamepad1);
+        liftPayload.operate(gamepad2);
+        intakeAndScore.operate(gamepad2);
     }
 
     /*
