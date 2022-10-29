@@ -31,7 +31,7 @@ public class OfficialTeleOp extends OpMode
      * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
      */
     public void loop() {
-        mecanumDrive.fieldCentricOperate(gamepad1);
+        mecanumDrive.operate(gamepad1);
         liftPayload.operate(gamepad2);
         intakeAndScore.operate(gamepad2);
     }

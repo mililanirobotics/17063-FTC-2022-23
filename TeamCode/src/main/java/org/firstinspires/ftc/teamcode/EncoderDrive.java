@@ -23,7 +23,7 @@ public class EncoderDrive {
         telemetry.update();
     }
 
-    public void operate(LinearOpMode linearOpMode, double speed, double distance) {
+    public void operate(LinearOpMode linearOpMode, double speed, double distance, String direction) {
         int motorTarget = (int)(distance * COUNTS_PER_INCH);
 
         robot.leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -41,14 +41,36 @@ public class EncoderDrive {
         robot.leftBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.rightBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        robot.leftFrontDrive.setPower(speed);
-        robot.rightFrontDrive.setPower(speed);
-        robot.leftBackDrive.setPower(speed);
-        robot.rightBackDrive.setPower(speed);
+        if (direction.equals("forward") || direction.equals("backward")) {
+            robot.leftFrontDrive.setPower(speed);
+            robot.rightFrontDrive.setPower(speed);
+            robot.leftBackDrive.setPower(speed);
+            robot.rightBackDrive.setPower(speed);
+        }
+        else if (direction.equals("left"))
+        {
+            robot.leftFrontDrive.setPower(-speed);
+            robot.rightFrontDrive.setPower(speed);
+            robot.leftBackDrive.setPower(speed);
+            robot.rightBackDrive.setPower(-speed);
+        }
+        else
+        {
+            robot.leftFrontDrive.setPower(speed);
+            robot.rightFrontDrive.setPower(-speed);
+            robot.leftBackDrive.setPower(-speed);
+            robot.rightBackDrive.setPower(speed);
+        }
 
         while(linearOpMode.opModeIsActive() && robot.leftFrontDrive.isBusy() || robot.rightFrontDrive.isBusy() || robot.leftBackDrive.isBusy() || robot.rightBackDrive.isBusy()) {
 
         }
+
+        robot.leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
     }
 
     public void shutdown() {

@@ -30,7 +30,7 @@ public class IntakeAndScore {
         }
 
         if (score >= 0.5) {
-            robot.scoringMotor.setPower(1);
+            robot.scoringMotor.setPower(0.75);
         }
         else {
             robot.scoringMotor.setPower(0);

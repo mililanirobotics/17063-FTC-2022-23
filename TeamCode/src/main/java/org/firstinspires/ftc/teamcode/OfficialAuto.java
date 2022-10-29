@@ -15,12 +15,14 @@ public class OfficialAuto extends LinearOpMode {
     final EncoderDrive encoderDrive = new EncoderDrive();
     final TurnDrive turnDrive = new TurnDrive();
     final VisionTracking vision = new VisionTracking();
+    final TimedDrive timedDrive = new TimedDrive();
 
     public void runOpMode() {
         // Initialization
         encoderDrive.init(this, telemetry);
         turnDrive.init(this, telemetry);
         vision.init(this, telemetry);
+        timedDrive.init(this, telemetry);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -33,23 +35,21 @@ public class OfficialAuto extends LinearOpMode {
             telemetry.addData("Status", "Trojan");
             telemetry.update();
 
-            encoderDrive.operate(this, 0.25, 24);
-            turnDrive.operate(this, 0.25, -90);
-            encoderDrive.operate(this, 0.25, 24);
+            timedDrive.operate(this, runtime, 0.25, "Trojan");
+//
         }
         else if (currentSignal.equals("Gears")) {
             telemetry.addData("Status", "Gears");
             telemetry.update();
 
-            encoderDrive.operate(this, 0.25, 24);
+            timedDrive.operate(this, runtime, 0.25, "Gears");
+
         }
         else if (currentSignal.equals("Hot Shot")) {
             telemetry.addData("Status", "Hot Shot");
             telemetry.update();
 
-            encoderDrive.operate(this, 0.25, 24);
-            turnDrive.operate(this, 0.25, 90);
-            encoderDrive.operate(this, 0.25, 24);
+            timedDrive.operate(this, runtime, 0.25, "Hot Shot");
         }
 
         vision.shutdown();

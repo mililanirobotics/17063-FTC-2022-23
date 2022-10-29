@@ -44,10 +44,9 @@ public class HardwareDeclarations {
         scoringMotor = hwMap.get(DcMotor.class, "scoringMotor");
 
         imu = hwMap.get(BNO055IMU.class, "imu");
-        camera = hwMap.get(Camera.class, "Webcam1");
 
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
-        leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftBackDrive.setDirection(DcMotor.Direction.FORWARD);
         rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
         leftLiftMotor.setDirection(DcMotor.Direction.FORWARD);

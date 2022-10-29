@@ -83,7 +83,7 @@ public class VisionTracking {
         int tfodMonitorViewId = linearOpMode.hardwareMap.appContext.getResources().getIdentifier(
                 "tfodMonitorViewId", "id", linearOpMode.hardwareMap.appContext.getPackageName());
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters();
-        tfodParameters.minResultConfidence = 0.75f;
+        tfodParameters.minResultConfidence = 0.50f;
         tfodParameters.isModelTensorFlow2 = true;
         tfodParameters.inputSize = 300;
         tfObjectDetector = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
