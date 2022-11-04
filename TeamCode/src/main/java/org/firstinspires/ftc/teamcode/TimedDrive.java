@@ -31,7 +31,7 @@ public class TimedDrive {
             robot.leftBackDrive.setPower(speed);
             robot.rightBackDrive.setPower(-speed);
 
-            while (elapsedTime.seconds() < 2.25) {
+            while (elapsedTime.seconds() < 2.5) {
             }
 
             robot.leftFrontDrive.setPower(speed);
@@ -39,7 +39,7 @@ public class TimedDrive {
             robot.leftBackDrive.setPower(speed);
             robot.rightBackDrive.setPower(speed);
 
-            while (elapsedTime.seconds() < 3.25) {
+            while (elapsedTime.seconds() < 3.5) {
 
             }
 
@@ -61,7 +61,7 @@ public class TimedDrive {
             robot.leftBackDrive.setPower(-speed);
             robot.rightBackDrive.setPower(-speed);
 
-            while (elapsedTime.seconds() < 2.5) {
+            while (elapsedTime.seconds() < 2) {
             }
 
             robot.leftFrontDrive.setPower(0);
@@ -70,19 +70,28 @@ public class TimedDrive {
             robot.rightBackDrive.setPower(0);
 
         }
-        else if (signalImage.equals("Hot Shot")){
+        else if (signalImage.equals("Hot Shot")) {
 
             elapsedTime.reset();
 
-            while (elapsedTime.seconds() < 1) {
+            while (elapsedTime.seconds() < 1.5) {
             }
 
             robot.leftFrontDrive.setPower(speed);
-            robot.rightFrontDrive.setPower(0);
-            robot.leftBackDrive.setPower(0);
+            robot.rightFrontDrive.setPower(-speed);
+            robot.leftBackDrive.setPower(-speed);
             robot.rightBackDrive.setPower(speed);
 
             while (elapsedTime.seconds() < 2.5) {
+            }
+
+            robot.leftFrontDrive.setPower(speed);
+            robot.rightFrontDrive.setPower(speed);
+            robot.leftBackDrive.setPower(speed);
+            robot.rightBackDrive.setPower(speed);
+
+            while (elapsedTime.seconds() < 3.5) {
+
             }
 
             robot.leftFrontDrive.setPower(0);
