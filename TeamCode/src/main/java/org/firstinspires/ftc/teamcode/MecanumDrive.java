@@ -20,9 +20,10 @@ public class MecanumDrive {
     final HardwareDeclarations robot = new HardwareDeclarations();
     final BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
+    static boolean slowModeOn = false;
+
     public void init(OpMode opMode, Telemetry telemetry) {
         parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
-
 
         robot.init(opMode.hardwareMap);
         robot.imu.initialize(parameters);
@@ -37,7 +38,14 @@ public class MecanumDrive {
         double rx = gamepad.right_stick_x;
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
 
-        if (gamepad.left_bumper) {
+        if (gamepad.left_bumper && !slowModeOn) {
+            slowModeOn = true;
+        }
+        else if (gamepad.left_bumper && slowModeOn){
+            slowModeOn = false;
+        }
+
+        if (slowModeOn) {
             robot.leftFrontDrive.setPower((y + x + rx) / denominator * 0.5);
             robot.rightFrontDrive.setPower((y - x - rx) / denominator * 0.5);
             robot.leftBackDrive.setPower((y - x + rx) / denominator * 0.5);

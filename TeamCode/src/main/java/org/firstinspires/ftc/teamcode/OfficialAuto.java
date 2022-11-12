@@ -34,22 +34,14 @@ public class OfficialAuto extends LinearOpMode {
         if (currentSignal.equals("Trojan")) {
             telemetry.addData("Status", "Trojan");
             telemetry.update();
-
-            timedDrive.operate(this, runtime, 0.15, "Trojan");
-//
         }
         else if (currentSignal.equals("Gears")) {
             telemetry.addData("Status", "Gears");
             telemetry.update();
-
-            timedDrive.operate(this, runtime, 0.15, "Gears");
-
         }
         else if (currentSignal.equals("Hot Shot")) {
             telemetry.addData("Status", "Hot Shot");
             telemetry.update();
-
-            timedDrive.operate(this, runtime, 0.15, "Hot Shot");
         }
 
         vision.shutdown();

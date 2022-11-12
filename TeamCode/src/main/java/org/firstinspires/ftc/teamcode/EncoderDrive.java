@@ -41,11 +41,17 @@ public class EncoderDrive {
         robot.leftBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.rightBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        if (direction.equals("forward") || direction.equals("backward")) {
+        if (direction.equals("forward")) {
             robot.leftFrontDrive.setPower(speed);
             robot.rightFrontDrive.setPower(speed);
             robot.leftBackDrive.setPower(speed);
             robot.rightBackDrive.setPower(speed);
+        }
+        else if (direction.equals("backward")) {
+            robot.leftFrontDrive.setPower(-speed);
+            robot.rightFrontDrive.setPower(-speed);
+            robot.leftBackDrive.setPower(-speed);
+            robot.rightBackDrive.setPower(-speed);
         }
         else if (direction.equals("left"))
         {
@@ -66,11 +72,15 @@ public class EncoderDrive {
 
         }
 
+        robot.leftFrontDrive.setPower(0);
+        robot.rightFrontDrive.setPower(0);
+        robot.leftBackDrive.setPower(0);
+        robot.rightBackDrive.setPower(0);
+
         robot.leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.leftBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
     }
 
     public void shutdown() {
