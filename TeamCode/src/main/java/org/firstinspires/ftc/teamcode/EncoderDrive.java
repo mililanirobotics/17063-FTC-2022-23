@@ -19,17 +19,27 @@ public class EncoderDrive {
     public void init(LinearOpMode linearOpMode, Telemetry telemetry) {
         robot.init(linearOpMode.hardwareMap);
 
+        robot.leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         telemetry.addData("Status", "Encoder Drive Initialized");
         telemetry.update();
     }
 
-    public void operate(LinearOpMode linearOpMode, double speed, double distance, String direction) {
+    public void operate(LinearOpMode linearOpMode, double speed, double distance, String direction, Telemetry telemetry) {
         int motorTarget = (int)(distance * COUNTS_PER_INCH);
 
         robot.leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.leftBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        robot.leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         robot.leftFrontDrive.setTargetPosition(motorTarget);
         robot.rightFrontDrive.setTargetPosition(motorTarget);
@@ -68,8 +78,20 @@ public class EncoderDrive {
             robot.rightBackDrive.setPower(speed);
         }
 
-        while(linearOpMode.opModeIsActive() && robot.leftFrontDrive.isBusy() || robot.rightFrontDrive.isBusy() || robot.leftBackDrive.isBusy() || robot.rightBackDrive.isBusy()) {
+        while(linearOpMode.opModeIsActive() && robot.leftFrontDrive.isBusy() || robot.rightFrontDrive.isBusy() && robot.leftBackDrive.isBusy() && robot.rightBackDrive.isBusy()) {
 
+            telemetry.addData("Left Front Target: ", robot.leftFrontDrive.getTargetPosition());
+            telemetry.addData("Left Back Target: ", robot.leftBackDrive.getTargetPosition());
+
+            telemetry.addData("Left Front Position: ", robot.leftFrontDrive.getCurrentPosition());
+            telemetry.addData("Left Back Position: ", robot.leftBackDrive.getCurrentPosition());
+            telemetry.addData("Right Front Position: ", robot.rightFrontDrive.getCurrentPosition());
+            telemetry.addData("Right Back Position: ", robot.rightBackDrive.getCurrentPosition());
+
+            telemetry.addData("Left Front Speed: ", robot.leftFrontDrive.getPower());
+            telemetry.addData("Left Back Speed: ", robot.leftBackDrive.getPower());
+
+            telemetry.update();
         }
 
         robot.leftFrontDrive.setPower(0);

@@ -28,6 +28,11 @@ public class MecanumDrive {
         robot.init(opMode.hardwareMap);
         robot.imu.initialize(parameters);
 
+        robot.leftFrontDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.rightFrontDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.leftBackDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.rightBackDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
         telemetry.addData("Status", "Mecanum Drive Initializes");
         telemetry.update();
     }
