@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class EncoderDrive {
@@ -19,14 +18,10 @@ public class EncoderDrive {
     public void init(LinearOpMode linearOpMode, Telemetry telemetry) {
         robot.init(linearOpMode.hardwareMap);
 
-        robot.leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
         telemetry.addData("Status", "Encoder Drive Initialized");
         telemetry.update();
     }
+
 
     public void operate(LinearOpMode linearOpMode, double speed, double distance, String direction, Telemetry telemetry) {
         int motorTarget = (int)(distance * COUNTS_PER_INCH);
@@ -36,60 +31,81 @@ public class EncoderDrive {
         robot.leftBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        robot.leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        robot.leftFrontDrive.setTargetPosition(motorTarget);
-        robot.rightFrontDrive.setTargetPosition(motorTarget);
-        robot.leftBackDrive.setTargetPosition(motorTarget);
-        robot.rightBackDrive.setTargetPosition(motorTarget);
-
-        robot.leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.leftBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.rightBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
         if (direction.equals("forward")) {
+
+            robot.leftFrontDrive.setTargetPosition(-motorTarget);
+            robot.rightFrontDrive.setTargetPosition(-motorTarget);
+            robot.leftBackDrive.setTargetPosition(-motorTarget);
+            robot.rightBackDrive.setTargetPosition(-motorTarget);
+
+            robot.leftFrontDrive.setPower(speed);
+            robot.rightFrontDrive.setPower(speed);
+            robot.leftBackDrive.setPower(-speed);
+            robot.rightBackDrive.setPower(speed);
+
+        }
+        else if (direction.equals("backward")) {
+
+            robot.leftFrontDrive.setTargetPosition(motorTarget);
+            robot.rightFrontDrive.setTargetPosition(motorTarget);
+            robot.leftBackDrive.setTargetPosition(motorTarget);
+            robot.rightBackDrive.setTargetPosition(motorTarget);
+
             robot.leftFrontDrive.setPower(speed);
             robot.rightFrontDrive.setPower(speed);
             robot.leftBackDrive.setPower(speed);
             robot.rightBackDrive.setPower(speed);
-        }
-        else if (direction.equals("backward")) {
-            robot.leftFrontDrive.setPower(-speed);
-            robot.rightFrontDrive.setPower(-speed);
-            robot.leftBackDrive.setPower(-speed);
-            robot.rightBackDrive.setPower(-speed);
         }
         else if (direction.equals("left"))
         {
-            robot.leftFrontDrive.setPower(-speed);
-            robot.rightFrontDrive.setPower(speed);
-            robot.leftBackDrive.setPower(speed);
-            robot.rightBackDrive.setPower(-speed);
-        }
-        else
-        {
+            robot.leftFrontDrive.setTargetPosition(motorTarget);
+            robot.rightFrontDrive.setTargetPosition(-motorTarget);
+            robot.leftBackDrive.setTargetPosition(motorTarget);
+            robot.rightBackDrive.setTargetPosition(motorTarget);
+
             robot.leftFrontDrive.setPower(speed);
-            robot.rightFrontDrive.setPower(-speed);
+            robot.rightFrontDrive.setPower(speed);
             robot.leftBackDrive.setPower(-speed);
             robot.rightBackDrive.setPower(speed);
         }
+        else
+        {
+            robot.leftFrontDrive.setTargetPosition(-motorTarget);
+            robot.rightFrontDrive.setTargetPosition(motorTarget);
+            robot.leftBackDrive.setTargetPosition(-motorTarget);
+            robot.rightBackDrive.setTargetPosition(-motorTarget);
+
+            robot.leftFrontDrive.setPower(speed);
+            robot.rightFrontDrive.setPower(speed);
+            robot.leftBackDrive.setPower(speed);
+            robot.rightBackDrive.setPower(speed);
+        }
+
+        robot.leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.leftBackDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.rightBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         while(linearOpMode.opModeIsActive() && robot.leftFrontDrive.isBusy() || robot.rightFrontDrive.isBusy() && robot.leftBackDrive.isBusy() && robot.rightBackDrive.isBusy()) {
 
-            telemetry.addData("Left Front Target: ", robot.leftFrontDrive.getTargetPosition());
-            telemetry.addData("Left Back Target: ", robot.leftBackDrive.getTargetPosition());
+            telemetry.addData("Left front target: ", robot.leftFrontDrive.getTargetPosition());
+            telemetry.addData("Right front target: ", robot.rightFrontDrive.getTargetPosition());
+            telemetry.addData("Left back target: ", robot.leftBackDrive.getTargetPosition());
+            telemetry.addData("Right back target: ", robot.rightBackDrive.getTargetPosition());
 
-            telemetry.addData("Left Front Position: ", robot.leftFrontDrive.getCurrentPosition());
-            telemetry.addData("Left Back Position: ", robot.leftBackDrive.getCurrentPosition());
-            telemetry.addData("Right Front Position: ", robot.rightFrontDrive.getCurrentPosition());
-            telemetry.addData("Right Back Position: ", robot.rightBackDrive.getCurrentPosition());
+            telemetry.addLine();
 
-            telemetry.addData("Left Front Speed: ", robot.leftFrontDrive.getPower());
-            telemetry.addData("Left Back Speed: ", robot.leftBackDrive.getPower());
+            telemetry.addData("Left front position: ", robot.leftFrontDrive.getCurrentPosition());
+            telemetry.addData("Right front position: ", robot.rightFrontDrive.getCurrentPosition());
+            telemetry.addData("Left back position: ", robot.leftBackDrive.getCurrentPosition());
+            telemetry.addData("Right back position: ", robot.rightBackDrive.getCurrentPosition());
+
+            telemetry.addLine();
+
+            telemetry.addData("Left front velocity: ", robot.leftFrontDrive.getPower());
+            telemetry.addData("Right front velocity: ", robot.rightFrontDrive.getPower());
+            telemetry.addData("Left back velocity: ", robot.leftBackDrive.getPower());
+            telemetry.addData("Right back velocity: ", robot.rightBackDrive.getPower());
 
             telemetry.update();
         }
