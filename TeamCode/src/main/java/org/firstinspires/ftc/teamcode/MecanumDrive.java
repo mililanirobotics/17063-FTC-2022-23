@@ -13,7 +13,7 @@ public class MecanumDrive {
     final HardwareDeclarations robot = new HardwareDeclarations();
     final BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
-    static boolean slowModeOn = false;
+    boolean slowModeOn = false;
 
     public void init(OpMode opMode, Telemetry telemetry) {
         parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
