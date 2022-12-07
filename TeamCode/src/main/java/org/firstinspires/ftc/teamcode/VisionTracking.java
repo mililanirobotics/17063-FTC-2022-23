@@ -63,6 +63,7 @@ public class VisionTracking {
                     telemetry.update();
                 }
             }
+
         }
 
         return signalImage;

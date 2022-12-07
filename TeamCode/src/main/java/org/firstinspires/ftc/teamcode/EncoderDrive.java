@@ -68,11 +68,35 @@ public class EncoderDrive {
             robot.leftBackDrive.setPower(-speed);
             robot.rightBackDrive.setPower(speed);
         }
-        else
+        else if (direction.equals("right"))
         {
             robot.leftFrontDrive.setTargetPosition(-motorTarget);
             robot.rightFrontDrive.setTargetPosition(motorTarget);
             robot.leftBackDrive.setTargetPosition(-motorTarget);
+            robot.rightBackDrive.setTargetPosition(-motorTarget);
+
+            robot.leftFrontDrive.setPower(speed);
+            robot.rightFrontDrive.setPower(speed);
+            robot.leftBackDrive.setPower(speed);
+            robot.rightBackDrive.setPower(speed);
+        }
+        else if (direction.equals("turn left"))
+        {
+            robot.leftFrontDrive.setTargetPosition(-motorTarget);
+            robot.rightFrontDrive.setTargetPosition(motorTarget);
+            robot.leftBackDrive.setTargetPosition(-motorTarget);
+            robot.rightBackDrive.setTargetPosition(motorTarget);
+
+            robot.leftFrontDrive.setPower(speed);
+            robot.rightFrontDrive.setPower(speed);
+            robot.leftBackDrive.setPower(-speed);
+            robot.rightBackDrive.setPower(speed);
+        }
+        else
+        {
+            robot.leftFrontDrive.setTargetPosition(motorTarget);
+            robot.rightFrontDrive.setTargetPosition(-motorTarget);
+            robot.leftBackDrive.setTargetPosition(motorTarget);
             robot.rightBackDrive.setTargetPosition(-motorTarget);
 
             robot.leftFrontDrive.setPower(speed);
