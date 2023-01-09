@@ -42,8 +42,8 @@ public class LiftPayload {
         }
 
         if (rightBumper) {
-            robot.leftLiftMotor.setPower(-1);
-            robot.rightLiftMotor.setPower(-1);
+            robot.leftLiftMotor.setPower(-0.75);
+            robot.rightLiftMotor.setPower(-0.75);
         }
         else {
             robot.leftLiftMotor.setPower(0);
@@ -58,12 +58,12 @@ public class LiftPayload {
         robot.rightLiftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         if (direction.equals("up")){
-            robot.leftLiftMotor.setTargetPosition(-motorTarget);
-            robot.rightLiftMotor.setTargetPosition(-motorTarget);
-        }
-        else {
             robot.leftLiftMotor.setTargetPosition(motorTarget);
             robot.rightLiftMotor.setTargetPosition(motorTarget);
+        }
+        else {
+            robot.leftLiftMotor.setTargetPosition(-motorTarget);
+            robot.rightLiftMotor.setTargetPosition(-motorTarget);
         }
 
         robot.leftLiftMotor.setPower(speed);

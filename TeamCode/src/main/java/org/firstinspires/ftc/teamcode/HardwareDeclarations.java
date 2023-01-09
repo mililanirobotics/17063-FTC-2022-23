@@ -38,7 +38,7 @@ public class HardwareDeclarations {
         imu = hwMap.get(BNO055IMU.class, "imu");
 
         leftFrontDrive.setDirection(DcMotorEx.Direction.REVERSE);
-        leftBackDrive.setDirection(DcMotorEx.Direction.FORWARD);
+        leftBackDrive.setDirection(DcMotorEx.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotorEx.Direction.FORWARD);
         rightBackDrive.setDirection(DcMotorEx.Direction.FORWARD);
         leftLiftMotor.setDirection(DcMotor.Direction.FORWARD);

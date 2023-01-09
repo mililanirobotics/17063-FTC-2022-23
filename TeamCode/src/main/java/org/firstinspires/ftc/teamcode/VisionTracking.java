@@ -17,7 +17,7 @@ public class VisionTracking {
 
     // Declare OpMode members
     final HardwareDeclarations robot = new HardwareDeclarations();
-    private static final String TFOD_MODEL_FILE  = "/sdcard/FIRST/tflitemodels/Custom Model v3.tflite";
+    private static final String TFOD_MODEL_FILE  = "/sdcard/FIRST/tflitemodels/Custom Model v4.tflite";
 
     private static final String[] LABELS = {
             "Gears",
