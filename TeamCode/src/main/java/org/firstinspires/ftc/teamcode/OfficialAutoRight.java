@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="Official Auto")
-public class OfficialAuto extends LinearOpMode {
+@Autonomous(name="Official Auto Right")
+public class OfficialAutoRight extends LinearOpMode {
 
     // Declare OpMode members
     final ElapsedTime runtime = new ElapsedTime();
@@ -43,63 +43,33 @@ public class OfficialAuto extends LinearOpMode {
         runtime.reset();
 
         // Code to run after start
-        String currentSignal = vision.operate(this, telemetry, runtime, 15);
-
-        if (currentSignal.equals("Trojan")) {
-            telemetry.addData("Status", "Trojan");
-            telemetry.update();
-
-            encoderDrive.operate(this, 0.25, 7, "left", telemetry);
-            encoderDrive.operate(this, 0.25, 6.5, "forward", telemetry);
-        }
-        else if (currentSignal.equals("Gears")) {
-            telemetry.addData("Status", "Gears");
-            telemetry.update();
-
-            encoderDrive.operate(this, 0.25, 6.5, "forward", telemetry);
-        }
-        else if (currentSignal.equals("Hot Shot")) {
-            telemetry.addData("Status", "Hot Shot");
-            telemetry.update();
-
-            encoderDrive.operate(this, 0.25, 7, "right", telemetry);
-            encoderDrive.operate(this, 0.25, 6.5, "forward", telemetry);
-        }
-        else {
-            telemetry.addData("Status", "No Image");
-            telemetry.update();
-
-            encoderDrive.operate(this, 0.25, 7, "left", telemetry);
-        }
-
-        // EXPERIMENTAL AUTO BELOW
+        String currentSignal = vision.operate(this, telemetry, runtime, 10);
 
         // Arriving to medium junction
-        encoderDrive.operate(this, 0.4, 7, "right", telemetry);
+        encoderDrive.operate(this, 0.4, 7, "left", telemetry);
         encoderDrive.operate(this, 0.4, 12.1, "forward", telemetry);
-        encoderDrive.operate(this, 0.4, 3.75, "left", telemetry);
+        encoderDrive.operate(this, 0.4, 3.6, "right", telemetry);
 
         // Scoring cone
-        liftPayload.operate(this, 1, 0.80, "up", telemetry);
-        encoderDrive.operate(this, 0.25, 0.5, "backward", telemetry);
-        liftPayload.operate(this, 1, 0.2, "down", telemetry);
-        intakeAndScore.operate(this, 0.50, 0.25, "score", telemetry);
-        encoderDrive.operate(this, 0.25, 0.5, "forward", telemetry);
+        liftPayload.operate(this, 0.8, 0.80, "up", telemetry);
+        encoderDrive.operate(this, 0.25, 0.7, "backward", telemetry);
+        liftPayload.operate(this, 0.8, 0.2, "down", telemetry);
+        intakeAndScore.operate(this, 0.50, 0.1, "score", telemetry);
+        encoderDrive.operate(this, 0.25, 1.2, "forward", telemetry);
 
         if (currentSignal.equals("Trojan")) {
-            encoderDrive.operate(this, 0.4, 10, "left", telemetry);
-        }
-        else if (currentSignal.equals("Gears")) {
             encoderDrive.operate(this, 0.4, 3, "left", telemetry);
         }
+        else if (currentSignal.equals("Gears")) {
+            encoderDrive.operate(this, 0.4, 3.2, "right", telemetry);
+        }
         else if (currentSignal.equals("Hot Shot")) {
-            encoderDrive.operate(this, 0.25, 3.2, "right", telemetry);
+            encoderDrive.operate(this, 0.25, 9.8, "right", telemetry);
         }
         else {
             encoderDrive.operate(this, 0.25, 4, "left", telemetry);
-            encoderDrive.operate(this, 0.25, 14, "backward", telemetry);
+            encoderDrive.operate(this, 0.25, 12.3, "backward", telemetry);
         }
-
 
         vision.shutdown();
         intakeAndScore.shutdown();

@@ -36,16 +36,13 @@ public class LiftPayload {
             robot.leftLiftMotor.setPower(1);
             robot.rightLiftMotor.setPower(1);
         }
-        else {
-            robot.leftLiftMotor.setPower(0);
-            robot.rightLiftMotor.setPower(0);
+        else if (rightBumper)
+        {
+            robot.leftLiftMotor.setPower(-0.2);
+            robot.rightLiftMotor.setPower(-0.2);
         }
-
-        if (rightBumper) {
-            robot.leftLiftMotor.setPower(-0.75);
-            robot.rightLiftMotor.setPower(-0.75);
-        }
-        else {
+        else
+        {
             robot.leftLiftMotor.setPower(0);
             robot.rightLiftMotor.setPower(0);
         }
@@ -73,6 +70,7 @@ public class LiftPayload {
         robot.rightLiftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         while (linearOpMode.opModeIsActive() && robot.leftLiftMotor.isBusy() && robot.rightLiftMotor.isBusy()){
+            robot.leftBackDrive.setVelocity(5);
 
         }
 
